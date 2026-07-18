@@ -73,7 +73,7 @@ button {
 /* -------- 整体骨架 -------- */
 .app {
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: 216px 1fr;
   min-height: 100vh;
 }
 
@@ -83,13 +83,14 @@ button {
 .sidebar {
   background: var(--bg-panel);
   border-right: 1px solid var(--border-hairline);
-  padding: 20px 12px 12px 16px;
+  padding: 28px 20px 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 28px;
-  position: relative;
-  height: auto;
-  overflow: visible;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 /* --- 品牌头 --- */
