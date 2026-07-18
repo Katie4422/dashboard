@@ -948,6 +948,18 @@ button {
       <div class="projects-grid" id="projects-grid"></div>
     </section>
 
+        <!-- ============ 待办清单（大 TODO 台账） ============ -->
+    <section class="card master-todo-card">
+      <div class="card-head">
+        <div class="card-head-left">
+          <span class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg></span>
+          <span class="card-title">待办清单</span>
+        </div>
+        <span class="card-meta" id="master-todo-meta">—</span>
+      </div>
+      <div id="master-todo-list"></div>
+    </section>
+
     <!-- ============ 领域仪表盘 ============ -->
     <section class="card domains-card">
       <div class="card-head">
@@ -1106,6 +1118,47 @@ function renderTasks() {
 }
 
 /* ---- 项目卡 ---- */
+
+/* ---- 待办清单（p-04 subtasks）---- */
+function renderMasterTodo() {
+  const el = document.getElementById('master-todo-list');
+  const meta = document.getElementById('master-todo-meta');
+  if (!el) return;
+  el.innerHTML = '';
+  const p04 = (D.projects || []).find(p => p.id === 'p-04');
+  if (!p04 || !p04.subtasks || p04.subtasks.length === 0) {
+    el.innerHTML = '<div class="pool-empty">待办清单空着</div>';
+    if (meta) meta.textContent = '0 项';
+    return;
+  }
+  // 过滤：仅待推进（未完成 且 非 💤 冻结）
+  const todoItems = p04.subtasks.filter(t => !t.done && !/^\u{1F4A4}/u.test(t.title));
+  const totalDone = p04.subtasks.filter(t => t.done).length;
+  const totalFrozen = p04.subtasks.filter(t => /^\u{1F4A4}/u.test(t.title)).length;
+  if (meta) meta.textContent = `${todoItems.length} 项待推进 · ${totalDone}✅ · ${totalFrozen}💤`;
+
+  if (todoItems.length === 0) {
+    el.innerHTML = '<div class="pool-empty">全部搞定啦 · 解冻几条接着干？</div>';
+    return;
+  }
+  const list = document.createElement('div');
+  list.className = 'task-list';
+  todoItems.forEach((t, idx) => {
+    const key = 'mt-' + idx;
+    const done = isDone(key);
+    const row = document.createElement('div');
+    row.className = 'task-item' + (done ? ' done' : '');
+    row.onclick = () => toggleDone(key);
+    row.innerHTML = `
+      <span class="task-check"></span>
+      <span class="task-title">${escapeHtml(t.title)}</span>
+      <span class="task-project-tag">大TODO</span>
+    `;
+    list.appendChild(row);
+  });
+  el.appendChild(list);
+}
+
 function renderProjects() {
   const grid = document.getElementById('projects-grid');
   grid.innerHTML = '';
@@ -1312,6 +1365,7 @@ function render() {
   renderTimeline();
   renderTasks();
   renderProjects();
+  renderMasterTodo();
   renderWaiting();
   renderDomainsGrid();
   renderMetrics();
