@@ -1488,13 +1488,9 @@ function closeProjectModal() {
   document.getElementById('project-modal-overlay').classList.remove('show');
   document.getElementById('project-modal').classList.remove('show');
 }
-(function initModalBinding() {
-  document.getElementById('modal-close-btn').addEventListener('click', closeProjectModal);
-  document.getElementById('project-modal-overlay').addEventListener('click', closeProjectModal);
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeProjectModal();
-  });
-})();
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeProjectModal();
+});
 
 /* ---- 侧栏点击跳转 ---- */
 function scrollToSection(evt, key) {
@@ -1513,7 +1509,7 @@ function scrollToSection(evt, key) {
 }
 </script>
 
-<div id="project-modal-overlay" class="modal-overlay"></div>
+<div id="project-modal-overlay" class="modal-overlay" onclick="closeProjectModal()"></div>
 <div id="project-modal" class="modal-shell">
   <div class="modal-card">
     <div class="modal-head">
@@ -1521,7 +1517,7 @@ function scrollToSection(evt, key) {
         <span class="modal-icon" id="modal-icon">·</span>
         <span class="modal-name" id="modal-name">·</span>
       </div>
-      <button class="modal-close" id="modal-close-btn" aria-label="关闭">✕</button>
+      <button class="modal-close" id="modal-close-btn" onclick="closeProjectModal()" aria-label="关闭">✕</button>
     </div>
     <div class="modal-body" id="modal-body"></div>
   </div>
