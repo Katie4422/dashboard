@@ -1017,6 +1017,12 @@ button {
             </span>
             <span class="card-title">今日时间轴</span>
           </div>
+          <div class="card-head-right" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-3);font-weight:600;">
+            <span id="tz-nl" style="font-variant-numeric:tabular-nums;"></span>
+            <span style="opacity:0.4;">/</span>
+            <span id="tz-bj" style="font-variant-numeric:tabular-nums;"></span>
+          </div>
+        </div>
           <span class="card-meta" id="timeline-meta">0 个时间块</span>
         </div>
         <div class="timeline-body" id="timeline-body"></div>
@@ -1162,6 +1168,24 @@ function renderTimeline() {
   const body = document.getElementById('timeline-body');
   const meta = document.getElementById('timeline-meta');
   body.innerHTML = '';
+
+  /* 双时区日期（荷兰 + 北京） */
+  try {
+    const fmt = (tz, d) => {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+      }).formatToParts(d);
+      const map = {};
+      parts.forEach(p => { map[p.type] = p.value; });
+      return (map.year || '') + '.' + (map.month || '') + '.' + (map.day || '');
+    };
+    const now = new Date();
+    const nlEl = document.getElementById('tz-nl');
+    const bjEl = document.getElementById('tz-bj');
+    if (nlEl) nlEl.textContent = fmt('Europe/Amsterdam', now) + ' NL';
+    if (bjEl) bjEl.textContent = fmt('Asia/Shanghai', now) + ' CN';
+  } catch(e) {}
+
 
   const events = D.timeline || [];
   meta.textContent = events.length + ' 个时间块';
