@@ -769,6 +769,109 @@ button {
   .timeline-slot .slot-hour { left: -48px; width: 40px; font-size: 11px; }
 }
 
+
+/* ── Modal 层 · pilot ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 9998;
+  background: rgba(30, 28, 24, 0.45);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .22s ease;
+}
+.modal-overlay.show { opacity: 1; pointer-events: auto; }
+.modal-shell {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 16px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .22s ease;
+}
+.modal-shell.show { opacity: 1; pointer-events: auto; }
+.modal-card {
+  background: var(--paper-1, #fbf7ee);
+  border-radius: 16px;
+  max-width: 640px; width: 100%;
+  max-height: 82vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(60, 48, 32, 0.18);
+  border: 1px solid rgba(140, 120, 80, 0.18);
+  transform: translateY(10px); opacity: 0;
+  transition: transform .22s ease, opacity .22s ease;
+}
+.modal-shell.show .modal-card { transform: translateY(0); opacity: 1; }
+.modal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px 10px 22px;
+  border-bottom: 1px solid rgba(140, 120, 80, 0.14);
+  position: sticky; top: 0; background: var(--paper-1, #fbf7ee);
+  z-index: 1;
+}
+.modal-head-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.modal-icon {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--token-sage, #7a9b8e);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+.modal-name { font-size: 16px; font-weight: 700; color: var(--ink-1, #3a3631); }
+.modal-close {
+  background: none; border: none; font-size: 22px; line-height: 1;
+  color: var(--ink-3, #8a8272); cursor: pointer; padding: 4px 8px;
+  border-radius: 6px; transition: background .15s;
+}
+.modal-close:hover { background: rgba(140, 120, 80, 0.12); color: var(--ink-1); }
+.modal-body { padding: 6px 22px 22px 22px; font-size: 13.5px; line-height: 1.6; color: var(--ink-2, #5a5346); }
+.m-desc {
+  font-size: 13px; line-height: 1.65; color: var(--ink-2);
+  padding: 4px 0 10px 0; white-space: pre-line;
+}
+.m-anchors {
+  background: rgba(140, 120, 80, 0.08);
+  border-radius: 10px; padding: 10px 14px; margin: 6px 0 14px 0;
+  font-size: 12.5px; line-height: 1.7; white-space: pre-line;
+  color: var(--ink-2);
+}
+.m-section {
+  margin: 10px 0 18px 0;
+  padding: 12px 14px; border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(140, 120, 80, 0.12);
+}
+.m-section-head {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 700; color: var(--ink-1);
+  margin-bottom: 6px;
+}
+.m-section-emoji { font-size: 16px; }
+.m-section-purpose { font-size: 12px; color: var(--ink-3); margin: 4px 0 8px 0; }
+.m-section-tasks { display: flex; flex-direction: column; gap: 6px; }
+.m-task { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; line-height: 1.5; }
+.m-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 1.5px solid var(--token-sage, #7a9b8e); flex-shrink: 0;
+  margin-top: 3px; background: #fff;
+}
+.m-dot.done { background: var(--token-sage, #7a9b8e); position: relative; }
+.m-dot.done::after {
+  content: ''; position: absolute; top: 1px; left: 3px;
+  width: 4px; height: 7px; border: solid #fff;
+  border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
+}
+.m-task.done .m-task-text { text-decoration: line-through; color: var(--ink-3); }
+.m-task-text { flex: 1; color: var(--ink-2); }
+.m-task.frozen .m-task-text { color: var(--ink-3); font-style: italic; }
+.m-section.frozen { opacity: 0.7; }
+.m-block-title {
+  font-size: 11px; font-weight: 700; color: var(--ink-3);
+  letter-spacing: 0.8px; text-transform: uppercase;
+  margin: 12px 0 4px 0;
+}
+@media (max-width: 640px) {
+  .modal-card { max-width: 100%; max-height: 92vh; }
+  .modal-head { padding: 14px 16px 8px 16px; }
+  .modal-body { padding: 4px 16px 18px 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -811,7 +914,7 @@ button {
         <span class="nav-icon">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10H4z"/><path d="M4 6l8 6 8-6"/></svg>
         </span>
-        <span>Waiting</span>
+        <span>Waiting List</span>
       </div>
     </nav>
 
@@ -912,7 +1015,7 @@ button {
 
         <div>
           <div class="load-sub-title">
-            <span>等待中 · Waiting</span>
+            <span>等待中 · Waiting List</span>
             <span id="waiting-count">0</span>
           </div>
           <div class="waiting-list" id="waiting-list"></div>
@@ -1114,14 +1217,17 @@ function renderProjects() {
     const card = document.createElement('div');
     card.className = 'project-card';
     card.setAttribute('data-token', p.color_token || 'sage');
+    card.setAttribute('data-project-id', p.id);
+    card.style.cursor = 'pointer';
     if (p.is_master_todo) card.classList.add('is-master');
+    card.addEventListener('click', (e) => { e.stopPropagation(); openProjectModal(p.id); });
 
     const percent = (p.progress_percent != null) ? p.progress_percent : null;
     const stageText = p.stage || '—';
     const label = p.short_label || (p.name || '').slice(0, 1);
 
     const waitBadge = (p.waiting && p.waiting.length > 0)
-      ? `<span class="project-waiting-badge">Waiting ${p.waiting.length}</span>`
+      ? `<span class="project-waiting-badge">Waiting List ${p.waiting.length}</span>`
       : '';
 
     const subtaskHtml = (p.subtasks && p.subtasks.length > 0) ? `
@@ -1221,7 +1327,7 @@ function renderDomainsGrid() {
       <div class="domain-cell-name">${escapeHtml(dom.name)}</div>
       <div class="domain-cell-stat">
         ${projs.length} 个项目<br>
-        ${waitingCnt} 项 Waiting
+        ${waitingCnt} 项 Waiting List
       </div>
     `;
     grid.appendChild(cell);
@@ -1319,6 +1425,77 @@ function render() {
 
 render();
 
+/* ── Modal 层逻辑 ── */
+function openProjectModal(projectId) {
+  const proj = (D.projects || []).find(x => x.id === projectId);
+  if (!proj) return;
+  document.getElementById('modal-icon').textContent = proj.short_label || '·';
+  document.getElementById('modal-icon').style.background =
+    'var(--token-' + (proj.color_token || 'sage') + ')';
+  document.getElementById('modal-name').textContent = proj.name;
+  const body = document.getElementById('modal-body');
+  let html = '';
+  if (proj.description) {
+    html += '<div class="m-desc">' + escapeHtml(proj.description) + '</div>';
+  }
+  if (proj.monthly_anchors) {
+    html += '<div class="m-block-title">本月锚点</div>';
+    html += '<div class="m-anchors">' + escapeHtml(proj.monthly_anchors) + '</div>';
+  }
+  if (proj.sections && proj.sections.length > 0) {
+    proj.sections.forEach(sec => {
+      const frozenCls = sec.is_frozen ? ' frozen' : '';
+      html += '<div class="m-section' + frozenCls + '">';
+      html += '<div class="m-section-head">';
+      html += '<span class="m-section-emoji">' + (sec.emoji || '') + '</span>';
+      html += '<span>' + escapeHtml(sec.name) + '</span></div>';
+      if (sec.purpose) {
+        html += '<div class="m-section-purpose">' + escapeHtml(sec.purpose) + '</div>';
+      }
+      html += '<div class="m-section-tasks">';
+      (sec.subtasks || []).forEach(t => {
+        html += '<div class="m-task">';
+        html += '<span class="m-dot' + (t.done ? ' done' : '') + '"></span>';
+        html += '<span class="m-task-text">' + escapeHtml(t.title) + '</span>';
+        html += '</div>';
+      });
+      html += '</div></div>';
+    });
+  }
+  if (proj.subtasks && proj.subtasks.length > 0) {
+    html += '<div class="m-block-title">待办</div>';
+    html += '<div class="m-section-tasks">';
+    proj.subtasks.forEach(t => {
+      html += '<div class="m-task">';
+      html += '<span class="m-dot' + (t.done ? ' done' : '') + '"></span>';
+      html += '<span class="m-task-text">' + escapeHtml(t.title) + '</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  if (proj.waiting && proj.waiting.length > 0) {
+    html += '<div class="m-block-title">Waiting List</div>';
+    proj.waiting.forEach(w => {
+      html += '<div class="m-task"><span class="m-task-text">' + escapeHtml(w.item) + '</span></div>';
+    });
+  }
+  if (!html) html = '<div class="m-desc" style="color:var(--ink-3)">暂无详情</div>';
+  body.innerHTML = html;
+  document.getElementById('project-modal-overlay').classList.add('show');
+  document.getElementById('project-modal').classList.add('show');
+}
+function closeProjectModal() {
+  document.getElementById('project-modal-overlay').classList.remove('show');
+  document.getElementById('project-modal').classList.remove('show');
+}
+(function initModalBinding() {
+  document.getElementById('modal-close-btn').addEventListener('click', closeProjectModal);
+  document.getElementById('project-modal-overlay').addEventListener('click', closeProjectModal);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeProjectModal();
+  });
+})();
+
 /* ---- 侧栏点击跳转 ---- */
 function scrollToSection(evt, key) {
   const map = {
@@ -1336,5 +1513,18 @@ function scrollToSection(evt, key) {
 }
 </script>
 
+<div id="project-modal-overlay" class="modal-overlay"></div>
+<div id="project-modal" class="modal-shell">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <span class="modal-icon" id="modal-icon">·</span>
+        <span class="modal-name" id="modal-name">·</span>
+      </div>
+      <button class="modal-close" id="modal-close-btn" aria-label="关闭">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
 </body>
 </html>
