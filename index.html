@@ -395,26 +395,6 @@ button {
   margin-top: 4px;
 }
 
-/* ========== Waiting Section ========== */
-.waiting-section {
-  grid-column: 1 / -1;
-  margin-top: 0;
-}
-.waiting-section .waiting-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 10px;
-  margin-top: 10px;
-}
-.waiting-section .waiting-empty {
-  grid-column: 1 / -1;
-  color: var(--ink-3);
-  font-size: 13px;
-  text-align: center;
-  padding: 16px;
-  opacity: 0.7;
-}
-
 .load-sub-title {
   font-size: 12px;
   color: var(--text-tertiary);
@@ -790,144 +770,41 @@ button {
 }
 
 
-
-/* ── Todo Master 独立区 ── */
+/* ========== Todo Master ========== */
 #todo-master {
-  margin-top: 14px; padding: 16px 18px;
-  background: var(--paper-2, #f5eeda);
-  border: 1px solid rgba(140, 120, 80, 0.18);
+  background: #fbf4e0;
   border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  border: 1px solid #e6d8a8;
 }
-.tm-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.tm-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: var(--ink-1); }
-.tm-title-icon { width: 22px; height: 22px; border-radius: 6px; background: var(--token-sand, #d4a76a);
-  display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 700; }
-.tm-counts { display: flex; gap: 14px; font-size: 12px; color: var(--ink-3); }
-.tm-counts span { display: inline-flex; align-items: center; gap: 4px; }
-.tm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-@media (max-width: 860px) { .tm-grid { grid-template-columns: 1fr; } }
-.tm-col { background: rgba(255, 255, 255, 0.6); border-radius: 10px; padding: 10px 12px;
-  border: 1px solid rgba(140, 120, 80, 0.10); }
-.tm-col-head { display: flex; align-items: center; justify-content: space-between;
-  font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.6px; text-transform: uppercase;
-  margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed rgba(140, 120, 80, 0.20); }
-.tm-col-badge { background: rgba(140, 120, 80, 0.14); color: var(--ink-2); padding: 1px 6px;
-  border-radius: 10px; font-size: 10px; }
-.tm-list { display: flex; flex-direction: column; gap: 5px; }
-.tm-item { display: flex; align-items: flex-start; gap: 7px; font-size: 12px; line-height: 1.55; color: var(--ink-2); }
-.tm-dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--token-sand, #d4a76a);
-  flex-shrink: 0; margin-top: 3px; background: #fff; position: relative; }
-.tm-dot.done { background: var(--token-sand, #d4a76a); }
-.tm-dot.done::after { content: ''; position: absolute; top: 1px; left: 2px;
-  width: 4px; height: 6px; border: solid #fff; border-width: 0 1.3px 1.3px 0; transform: rotate(45deg); }
-.tm-dot.frozen { border-color: var(--ink-3); background: rgba(140,120,80,0.08); }
-.tm-item.done .tm-text { text-decoration: line-through; color: var(--ink-3); }
-.tm-item.frozen .tm-text { color: var(--ink-3); font-style: italic; }
-.tm-waiting { margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(140, 120, 80, 0.20); }
-.tm-waiting-head { font-size: 11px; font-weight: 700; color: var(--ink-3);
-  letter-spacing: 0.6px; margin-bottom: 6px; }
-/* ── Modal 层 · pilot ── */
-.modal-overlay {
-  position: fixed; inset: 0; z-index: 9998;
-  background: rgba(30, 28, 24, 0.45);
-  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-  opacity: 0; pointer-events: none;
-  transition: opacity .22s ease;
+#todo-master .card-head { margin-bottom: 10px; }
+.todo-master-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
-.modal-overlay.show { opacity: 1; pointer-events: auto; }
-.modal-shell {
-  position: fixed; inset: 0; z-index: 9999;
-  display: flex; align-items: center; justify-content: center;
-  padding: 24px 16px;
-  opacity: 0; pointer-events: none;
-  transition: opacity .22s ease;
+.todo-col {
+  background: rgba(255,255,255,0.5);
+  border-radius: 10px;
+  padding: 10px 12px;
 }
-.modal-shell.show { opacity: 1; pointer-events: auto; }
-.modal-card {
-  background: var(--paper-1, #fbf7ee);
-  border-radius: 16px;
-  max-width: 640px; width: 100%;
-  max-height: 82vh;
-  overflow-y: auto;
-  box-shadow: 0 24px 60px rgba(60, 48, 32, 0.18);
-  border: 1px solid rgba(140, 120, 80, 0.18);
-  transform: translateY(10px); opacity: 0;
-  transition: transform .22s ease, opacity .22s ease;
-}
-.modal-shell.show .modal-card { transform: translateY(0); opacity: 1; }
-.modal-head {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 22px 10px 22px;
-  border-bottom: 1px solid rgba(140, 120, 80, 0.14);
-  position: sticky; top: 0; background: var(--paper-1, #fbf7ee);
-  z-index: 1;
-}
-.modal-head-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.modal-icon {
-  width: 34px; height: 34px; border-radius: 10px;
-  background: var(--token-sage, #7a9b8e);
-  color: #fff; display: flex; align-items: center; justify-content: center;
-  font-size: 14px; font-weight: 700; flex-shrink: 0;
-}
-.modal-name { font-size: 16px; font-weight: 700; color: var(--ink-1, #3a3631); }
-.modal-close {
-  background: none; border: none; font-size: 22px; line-height: 1;
-  color: var(--ink-3, #8a8272); cursor: pointer; padding: 4px 8px;
-  border-radius: 6px; transition: background .15s;
-}
-.modal-close:hover { background: rgba(140, 120, 80, 0.12); color: var(--ink-1); }
-.modal-body { padding: 6px 22px 22px 22px; font-size: 13.5px; line-height: 1.6; color: var(--ink-2, #5a5346); }
-.m-desc {
-  font-size: 13px; line-height: 1.65; color: var(--ink-2);
-  padding: 4px 0 10px 0; white-space: pre-line;
-}
-.m-anchors {
-  background: rgba(140, 120, 80, 0.08);
-  border-radius: 10px; padding: 10px 14px; margin: 6px 0 14px 0;
-  font-size: 12.5px; line-height: 1.7; white-space: pre-line;
-  color: var(--ink-2);
-}
-.m-section {
-  margin: 10px 0 18px 0;
-  padding: 12px 14px; border-radius: 12px;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(140, 120, 80, 0.12);
-}
-.m-section-head {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 14px; font-weight: 700; color: var(--ink-1);
+.todo-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: var(--ink-3, #8a7a55);
   margin-bottom: 6px;
+  text-transform: uppercase;
 }
-.m-section-emoji { font-size: 16px; }
-.m-section-purpose { font-size: 12px; color: var(--ink-3); margin: 4px 0 8px 0; }
-.m-section-tasks { display: flex; flex-direction: column; gap: 6px; }
-.m-task { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; line-height: 1.5; }
-.m-dot {
-  width: 12px; height: 12px; border-radius: 50%;
-  border: 1.5px solid var(--token-sage, #7a9b8e); flex-shrink: 0;
-  margin-top: 3px; background: #fff;
+.todo-item {
+  font-size: 12.5px;
+  color: var(--ink-2, #5a5346);
+  padding: 4px 0;
+  line-height: 1.4;
 }
-.m-dot.done { background: var(--token-sage, #7a9b8e); position: relative; }
-.m-dot.done::after {
-  content: ''; position: absolute; top: 1px; left: 3px;
-  width: 4px; height: 7px; border: solid #fff;
-  border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
-}
-.m-task.done .m-task-text { text-decoration: line-through; color: var(--ink-3); }
-.m-task-text { flex: 1; color: var(--ink-2); }
-.m-task.frozen .m-task-text { color: var(--ink-3); font-style: italic; }
-.m-section.frozen { opacity: 0.7; }
-.m-block-title {
-  font-size: 11px; font-weight: 700; color: var(--ink-3);
-  letter-spacing: 0.8px; text-transform: uppercase;
-  margin: 12px 0 4px 0;
-}
-@media (max-width: 640px) {
-  .modal-card { max-width: 100%; max-height: 92vh; }
-  .modal-head { padding: 14px 16px 8px 16px; }
-  .modal-body { padding: 4px 16px 18px 16px; }
-}
-
+.todo-item.is-done { opacity: 0.5; text-decoration: line-through; }
+.todo-empty { font-size: 11px; color: #b7a77c; opacity: 0.6; }
 </style>
 </head>
 <body>
@@ -966,11 +843,11 @@ button {
         </span>
         <span>大 TODO</span>
       </div>
-      <div class="nav-item" onclick="scrollToSection(event, 'todo')">
+      <div class="nav-item" onclick="scrollToSection(event, 'waiting')">
         <span class="nav-icon">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10H4z"/><path d="M4 6l8 6 8-6"/></svg>
         </span>
-        <span>Waiting List</span>
+        <span>Waiting</span>
       </div>
     </nav>
 
@@ -1026,7 +903,7 @@ button {
   <main class="main">
 
     <!-- ============ 顶行：时间轴 + 今日情况 ============ -->
-        <div class="top-row">
+    <div class="top-row">
 
       <!-- 今日时间轴 -->
       <section class="card timeline">
@@ -1042,13 +919,12 @@ button {
             <span style="opacity:0.4;">/</span>
             <span id="tz-bj" style="font-variant-numeric:tabular-nums;"></span>
           </div>
-        </div>
-        <span class="card-meta" id="timeline-meta">0 个时间块</span>
+          <span class="card-meta" id="timeline-meta">0 个时间块</span>
         </div>
         <div class="timeline-body" id="timeline-body"></div>
       </section>
 
-      <!-- 今日情况 -->
+      <!-- 今日情况 + Waiting 概览 -->
       <section class="card load-card">
         <div class="card-head">
           <div class="card-head-left">
@@ -1074,6 +950,14 @@ button {
             <div class="metric-label">已完成</div>
           </div>
         </div>
+
+        <div>
+          <div class="load-sub-title">
+            <span>等待中 · Waiting</span>
+            <span id="waiting-count">0</span>
+          </div>
+          <div class="waiting-list" id="waiting-list"></div>
+        </div>
       </section>
     </div>
 
@@ -1091,9 +975,6 @@ button {
       <div id="task-list"></div>
     </section>
 
-    <!-- ============ 待办清单（独立区） ============ -->
-    <section id="todo-master"></section>
-
     <!-- ============ 项目推进 ============ -->
     <section class="card projects-section">
       <div class="card-head">
@@ -1105,24 +986,9 @@ button {
         </div>
         <span class="card-meta">按结果拆下一步</span>
       </div>
-      <div class="projects-grid" id="projects-grid"></div>
-    </section>
-
-    <!-- ============ 等待中 Waiting List ============ -->
-    <section class="card waiting-section">
-      <div class="card-head">
-        <div class="card-head-left">
-          <span class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </span>
-          <span class="card-title">等待中 Waiting List</span>
-        </div>
-        <span class="card-meta" id="waiting-count-meta">0 条</span>
-      </div>
-      <div class="waiting-list" id="waiting-list"></div>
+          <!-- 待办清单独立区 -->
+    <section id="todo-master"></section>
+<div class="projects-grid" id="projects-grid"></div>
     </section>
 
     <!-- ============ 领域仪表盘 ============ -->
@@ -1201,24 +1067,6 @@ function renderTimeline() {
   const meta = document.getElementById('timeline-meta');
   body.innerHTML = '';
 
-  /* 双时区日期（荷兰 + 北京） */
-  try {
-    const fmt = (tz, d) => {
-      const parts = new Intl.DateTimeFormat('en-CA', {
-        timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
-      }).formatToParts(d);
-      const map = {};
-      parts.forEach(p => { map[p.type] = p.value; });
-      return (map.year || '') + '.' + (map.month || '') + '.' + (map.day || '');
-    };
-    const now = new Date();
-    const nlEl = document.getElementById('tz-nl');
-    const bjEl = document.getElementById('tz-bj');
-    if (nlEl) nlEl.textContent = fmt('Europe/Amsterdam', now) + ' NL';
-    if (bjEl) bjEl.textContent = fmt('Asia/Shanghai', now) + ' CN';
-  } catch(e) {}
-
-
   const events = D.timeline || [];
   meta.textContent = events.length + ' 个时间块';
 
@@ -1264,6 +1112,17 @@ function renderTimeline() {
     `;
     body.appendChild(slot);
   });
+
+  // 双时区日期
+  const now = new Date();
+  const nlFmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam', year: 'numeric', month: '2-digit', day: '2-digit' });
+  const bjFmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' });
+  const nl = nlFmt.format(now).replace(/-/g, '.');
+  const bj = bjFmt.format(now).replace(/-/g, '.');
+  const nlEl = document.getElementById('tz-nl');
+  const bjEl = document.getElementById('tz-bj');
+  if (nlEl) nlEl.textContent = nl + ' NL';
+  if (bjEl) bjEl.textContent = bj + ' CN';
 }
 
 /* ---- 任务池 ---- */
@@ -1301,26 +1160,53 @@ function renderTasks() {
 }
 
 /* ---- 项目卡 ---- */
+
+function renderTodoMaster() {
+  const container = document.getElementById('todo-master');
+  if (!container) return;
+  const tm = window.DASHBOARD_DATA && window.DASHBOARD_DATA.todo_master;
+  if (!tm) { container.style.display = 'none'; return; }
+  const subs = tm.subtasks || [];
+  const doneItems = subs.filter(t => t.done);
+  const frozenItems = subs.filter(t => !t.done && /^\u{1F4A4}/u.test(t.title));
+  const activeItems = subs.filter(t => !t.done && !/^\u{1F4A4}/u.test(t.title));
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function itemHtml(list, emptyMsg) {
+    if (list.length === 0) return '<div class="todo-empty">' + emptyMsg + '</div>';
+    return list.map(t => '<div class="todo-item' + (t.done ? ' is-done' : '') + '">' + esc(t.title) + '</div>').join('');
+  }
+  container.innerHTML = `
+    <div class="card-head">
+      <div class="card-head-left">
+        <span class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg></span>
+        <span class="card-title">待办清单 · 大 TODO 台账</span>
+      </div>
+      <span class="card-meta">${doneItems.length}✅ · ${activeItems.length}⬜ · ${frozenItems.length}💤</span>
+    </div>
+    <div class="todo-master-grid">
+      <div class="todo-col todo-done"><div class="todo-col-title">✅ 已完成</div>${itemHtml(doneItems, '暂无')}</div>
+      <div class="todo-col todo-active"><div class="todo-col-title">⬜ 待推进</div>${itemHtml(activeItems, '暂无')}</div>
+      <div class="todo-col todo-frozen"><div class="todo-col-title">💤 冻结</div>${itemHtml(frozenItems, '暂无')}</div>
+    </div>`;
+}
+
 function renderProjects() {
   const grid = document.getElementById('projects-grid');
   grid.innerHTML = '';
 
   D.projects.forEach(p => {
-    if (p.id === (D.todo_master && D.todo_master.id)) return;
+    if (D.todo_master && p.id === D.todo_master.id) return;
     const card = document.createElement('div');
     card.className = 'project-card';
     card.setAttribute('data-token', p.color_token || 'sage');
-    card.setAttribute('data-project-id', p.id);
-    card.style.cursor = 'pointer';
     if (p.is_master_todo) card.classList.add('is-master');
-    card.addEventListener('click', (e) => { e.stopPropagation(); openProjectModal(p.id); });
 
     const percent = (p.progress_percent != null) ? p.progress_percent : null;
     const stageText = p.stage || '—';
     const label = p.short_label || (p.name || '').slice(0, 1);
 
     const waitBadge = (p.waiting && p.waiting.length > 0)
-      ? `<span class="project-waiting-badge">Waiting List ${p.waiting.length}</span>`
+      ? `<span class="project-waiting-badge">Waiting ${p.waiting.length}</span>`
       : '';
 
     const subtaskHtml = (p.subtasks && p.subtasks.length > 0) ? `
@@ -1373,7 +1259,7 @@ function renderProjects() {
 /* ---- Waiting 汇总 ---- */
 function renderWaiting() {
   const list = document.getElementById('waiting-list');
-  const cnt = document.getElementById('waiting-count') || null;
+  const cnt = document.getElementById('waiting-count');
   list.innerHTML = '';
 
   const items = [];
@@ -1382,9 +1268,7 @@ function renderWaiting() {
       items.push({ ...w, project_name: p.name, project_id: p.id });
     });
   });
-  if (cnt) cnt.textContent = items.length;
-  const metaEl = document.getElementById('waiting-count-meta');
-  if (metaEl) metaEl.textContent = items.length + ' 条';
+  cnt.textContent = items.length;
   document.getElementById('side-wait').textContent = items.length;
 
   if (items.length === 0) {
@@ -1422,7 +1306,7 @@ function renderDomainsGrid() {
       <div class="domain-cell-name">${escapeHtml(dom.name)}</div>
       <div class="domain-cell-stat">
         ${projs.length} 个项目<br>
-        ${waitingCnt} 项 Waiting List
+        ${waitingCnt} 项 Waiting
       </div>
     `;
     grid.appendChild(cell);
@@ -1513,137 +1397,13 @@ function render() {
   renderTimeline();
   renderTasks();
   renderTodoMaster();
-renderProjects();
+  renderProjects();
   renderWaiting();
   renderDomainsGrid();
   renderMetrics();
 }
 
 render();
-
-/* ── Modal 层逻辑 ── */
-function openProjectModal(projectId) {
-  const proj = (D.projects || []).find(x => x.id === projectId);
-  if (!proj) return;
-  document.getElementById('modal-icon').textContent = proj.short_label || '·';
-  document.getElementById('modal-icon').style.background =
-    'var(--token-' + (proj.color_token || 'sage') + ')';
-  document.getElementById('modal-name').textContent = proj.name;
-  const body = document.getElementById('modal-body');
-  let html = '';
-  if (proj.description) {
-    html += '<div class="m-desc">' + escapeHtml(proj.description) + '</div>';
-  }
-  if (proj.monthly_anchors) {
-    html += '<div class="m-block-title">本月锚点</div>';
-    html += '<div class="m-anchors">' + escapeHtml(proj.monthly_anchors) + '</div>';
-  }
-  if (proj.sections && proj.sections.length > 0) {
-    proj.sections.forEach(sec => {
-      const frozenCls = sec.is_frozen ? ' frozen' : '';
-      html += '<div class="m-section' + frozenCls + '">';
-      html += '<div class="m-section-head">';
-      html += '<span class="m-section-emoji">' + (sec.emoji || '') + '</span>';
-      html += '<span>' + escapeHtml(sec.name) + '</span></div>';
-      if (sec.purpose) {
-        html += '<div class="m-section-purpose">' + escapeHtml(sec.purpose) + '</div>';
-      }
-      html += '<div class="m-section-tasks">';
-      (sec.subtasks || []).forEach(t => {
-        html += '<div class="m-task">';
-        html += '<span class="m-dot' + (t.done ? ' done' : '') + '"></span>';
-        html += '<span class="m-task-text">' + escapeHtml(t.title) + '</span>';
-        html += '</div>';
-      });
-      html += '</div></div>';
-    });
-  }
-  if (proj.subtasks && proj.subtasks.length > 0) {
-    html += '<div class="m-block-title">待办</div>';
-    html += '<div class="m-section-tasks">';
-    proj.subtasks.forEach(t => {
-      html += '<div class="m-task">';
-      html += '<span class="m-dot' + (t.done ? ' done' : '') + '"></span>';
-      html += '<span class="m-task-text">' + escapeHtml(t.title) + '</span>';
-      html += '</div>';
-    });
-    html += '</div>';
-  }
-  if (proj.waiting && proj.waiting.length > 0) {
-    html += '<div class="m-block-title">Waiting List</div>';
-    proj.waiting.forEach(w => {
-      html += '<div class="m-task"><span class="m-task-text">' + escapeHtml(w.item) + '</span></div>';
-    });
-  }
-  if (!html) html = '<div class="m-desc" style="color:var(--ink-3)">暂无详情</div>';
-  body.innerHTML = html;
-  document.getElementById('project-modal-overlay').classList.add('show');
-  document.getElementById('project-modal').classList.add('show');
-}
-function closeProjectModal() {
-  document.getElementById('project-modal-overlay').classList.remove('show');
-  document.getElementById('project-modal').classList.remove('show');
-}
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeProjectModal();
-});
-
-
-/* ---- Todo Master 独立区 ---- */
-function renderTodoMaster() {
-  const container = document.getElementById('todo-master');
-  if (!container) return;
-  const tm = window.DASHBOARD_DATA && window.DASHBOARD_DATA.todo_master;
-  if (!tm) { container.style.display = 'none'; return; }
-  const subs = tm.subtasks || [];
-  const doneItems = subs.filter(t => t.done);
-  const frozenItems = subs.filter(t => !t.done && /^\u{1F4A4}/u.test(t.title));
-  const activeItems = subs.filter(t => !t.done && !/^\u{1F4A4}/u.test(t.title));
-  const waiting = tm.waiting || [];
-
-  function escapeHtml(s) {
-    return (s || '').replace(/[&<>"']/g, c =>
-      ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
-  }
-  function makeItem(t, cls) {
-    return '<div class="tm-item ' + cls + '">'
-         + '<span class="tm-dot ' + (cls || '') + '"></span>'
-         + '<span class="tm-text">' + escapeHtml(t.title) + '</span></div>';
-  }
-
-  let html = '<div class="tm-head">';
-  html += '<div class="tm-title"><span class="tm-title-icon">T</span><span>' + escapeHtml(tm.name || '待办清单') + '</span></div>';
-  html += '<div class="tm-counts">';
-  html += '<span style="color:var(--token-sage)">✅ ' + doneItems.length + '</span>';
-  html += '<span style="color:var(--token-blue)">⬜ ' + activeItems.length + '</span>';
-  html += '<span style="color:var(--ink-3)">💤 ' + frozenItems.length + '</span>';
-  if (waiting.length > 0) html += '<span style="color:var(--token-amber)">⏳ ' + waiting.length + '</span>';
-  html += '</div></div>';
-
-  html += '<div class="tm-grid">';
-  html += '<div class="tm-col"><div class="tm-col-head"><span>✅ 已完成</span><span class="tm-col-badge">' + doneItems.length + '</span></div><div class="tm-list">';
-  if (doneItems.length === 0) html += '<div class="tm-item" style="color:var(--ink-3);font-size:11px;">暂无</div>';
-  else doneItems.forEach(t => { html += makeItem(t, 'done'); });
-  html += '</div></div>';
-  html += '<div class="tm-col"><div class="tm-col-head"><span>⬜ 待推进</span><span class="tm-col-badge">' + activeItems.length + '</span></div><div class="tm-list">';
-  if (activeItems.length === 0) html += '<div class="tm-item" style="color:var(--ink-3);font-size:11px;">暂无</div>';
-  else activeItems.forEach(t => { html += makeItem(t, ''); });
-  html += '</div></div>';
-  html += '<div class="tm-col"><div class="tm-col-head"><span>💤 冻结</span><span class="tm-col-badge">' + frozenItems.length + '</span></div><div class="tm-list">';
-  if (frozenItems.length === 0) html += '<div class="tm-item" style="color:var(--ink-3);font-size:11px;">暂无</div>';
-  else frozenItems.forEach(t => { html += makeItem(t, 'frozen'); });
-  html += '</div></div>';
-  html += '</div>';
-
-  if (waiting.length > 0) {
-    html += '<div class="tm-waiting"><div class="tm-waiting-head">WAITING LIST · ' + waiting.length + '</div>';
-    waiting.forEach(w => {
-      html += '<div class="tm-item"><span class="tm-text" style="color:var(--ink-3)">⏳ ' + escapeHtml(w.item) + '</span></div>';
-    });
-    html += '</div>';
-  }
-  container.innerHTML = html;
-}
 
 /* ---- 侧栏点击跳转 ---- */
 function scrollToSection(evt, key) {
@@ -1663,18 +1423,5 @@ function scrollToSection(evt, key) {
 }
 </script>
 
-<div id="project-modal-overlay" class="modal-overlay" onclick="closeProjectModal()"></div>
-<div id="project-modal" class="modal-shell">
-  <div class="modal-card">
-    <div class="modal-head">
-      <div class="modal-head-left">
-        <span class="modal-icon" id="modal-icon">·</span>
-        <span class="modal-name" id="modal-name">·</span>
-      </div>
-      <button class="modal-close" id="modal-close-btn" onclick="closeProjectModal()" aria-label="关闭">✕</button>
-    </div>
-    <div class="modal-body" id="modal-body"></div>
-  </div>
-</div>
 </body>
 </html>
