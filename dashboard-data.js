@@ -1,7 +1,7 @@
 /**
  * 个人生活看板 - 数据文件 v5
  * v5（2026-07-19）：p-04 升级为顶层 todo_master 独立区
- *   - 18 项目 + 1 待办清单区
+ *   - 18 项目 + 1 待办清单区（17 条 subtasks：✅ 10 + ⬜ 4 + 💤 3）
  */
 window.DASHBOARD_DATA = {
   "meta": {
@@ -427,11 +427,15 @@ window.DASHBOARD_DATA = {
         "done": false
       },
       {
-        "title": "META-02 AI 副业变现体系（已出 v1）",
+        "title": "✅ AI 副业变现体系（已出 v1）",
         "done": true
       },
       {
-        "title": "🔥 FrieslandCampina BA Portal 直投",
+        "title": "💤 夏鹏职场课重构（暂缓冻结）",
+        "done": false
+      },
+      {
+        "title": "✅ FrieslandCampina BA Portal 直投",
         "done": true
       },
       {
@@ -471,11 +475,11 @@ window.DASHBOARD_DATA = {
         "done": false
       },
       {
-        "title": "💤 盘点夏鹏课模块（冻结）",
+        "title": "💤 盘点夏鹏课模块结构（冻结）",
         "done": false
       },
       {
-        "title": "💤 定夏鹏课周更机制（冻结）",
+        "title": "💤 定夏鹏课每周一个模块输出机制（冻结）",
         "done": false
       }
     ],
