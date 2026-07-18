@@ -77,7 +77,79 @@ window.DASHBOARD_DATA = {
       stage: "构思中",
       next_step: "",
       deadline: null,
-      subtasks: [],
+      subtasks: [
+      {
+        "title": "✅ SYV 研究流程",
+        "done": true
+      },
+      {
+        "title": "✅ 苹果订阅取消",
+        "done": true
+      },
+      {
+        "title": "META-01 荷兰求职工签（12 动作拆解）",
+        "done": false
+      },
+      {
+        "title": "✅ AI 副业变现体系（已出 v1）",
+        "done": true
+      },
+      {
+        "title": "💤 夏鹏职场课重构（暂缓冻结）",
+        "done": false
+      },
+      {
+        "title": "✅ FrieslandCampina BA Portal 直投",
+        "done": true
+      },
+      {
+        "title": "✅ Stolt Manager LinkedIn 冷触达",
+        "done": true
+      },
+      {
+        "title": "✅ 30 家清单补 8-10 家",
+        "done": true
+      },
+      {
+        "title": "✅ Recommendation 邮件截图入档",
+        "done": true
+      },
+      {
+        "title": "✅ Elevator Speech 平衡版 v0.2 归档",
+        "done": true
+      },
+      {
+        "title": "✅ Q01 STAR 答题",
+        "done": true
+      },
+      {
+        "title": "✅ Q04 PREP+FABE 答题",
+        "done": true
+      },
+      {
+        "title": "09-07 前累计 40+ 投递",
+        "done": false
+      },
+      {
+        "title": "10-07 前累计 60+ 投递",
+        "done": false
+      },
+      {
+        "title": "AI 副业拆解方案 v1 起草",
+        "done": false
+      },
+      {
+        "title": "💤 盘点夏鹏课模块结构（冻结）",
+        "done": false
+      },
+      {
+        "title": "💤 定夏鹏课每周一个模块输出机制（冻结）",
+        "done": false
+      }
+    ],
+    "progress_percent": null,
+    "color_token": "sand",
+    "waiting": [],
       progress_percent: null,
       color_token: "sand",
       is_master_todo: true,
