@@ -1038,6 +1038,15 @@ function renderSideDomains() {
 
 /* ---- 时间轴 ---- */
 function renderTimeline() {
+  // 双时区日期
+  const now = new Date();
+  const nlFmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now).replace(/-/g, '.');
+  const bjFmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now).replace(/-/g, '.');
+  const nlEl = document.getElementById('tz-nl');
+  const bjEl = document.getElementById('tz-bj');
+  if (nlEl) nlEl.textContent = nlFmt + ' NL';
+  if (bjEl) bjEl.textContent = bjFmt + ' CN';
+
   const body = document.getElementById('timeline-body');
   const meta = document.getElementById('timeline-meta');
   body.innerHTML = '';
@@ -1087,15 +1096,6 @@ function renderTimeline() {
     `;
     body.appendChild(slot);
   });
-
-  // 双时区日期
-  const now = new Date();
-  const nlFmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now).replace(/-/g, '.');
-  const bjFmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now).replace(/-/g, '.');
-  const nlEl = document.getElementById('tz-nl');
-  const bjEl = document.getElementById('tz-bj');
-  if (nlEl) nlEl.textContent = nlFmt + ' NL';
-  if (bjEl) bjEl.textContent = bjFmt + ' CN';
 }
 
 /* ---- 任务池 ---- */
