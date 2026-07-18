@@ -1,8 +1,7 @@
 /**
- * 个人生活看板 - 数据文件 v4
- * v4（2026-07-19）：p-04 全量 17 条 + p-15 详情 + Modal 层支持
- *   - p-15 新增 description / monthly_anchors / sections 字段
- *   - tasks 池移除 AI+星盘 · 新增 🔥 07-19 私教回放总结
+ * 个人生活看板 - 数据文件 v5
+ * v5（2026-07-19）：p-04 升级为顶层 todo_master 独立区
+ *   - 18 项目 + 1 待办清单区
  */
 window.DASHBOARD_DATA = {
   "meta": {
@@ -143,85 +142,6 @@ window.DASHBOARD_DATA = {
       "progress_percent": null,
       "color_token": "sage",
       "waiting": []
-    },
-    {
-      "id": "p-04",
-      "name": "待办清单（大 TODO 台账）",
-      "short_label": "TODO",
-      "domain": "d-sand",
-      "stage": "推进中",
-      "next_step": "从大台账挑今日事项进任务池",
-      "deadline": null,
-      "subtasks": [
-        {
-          "title": "✅ SYV 研究流程",
-          "done": true
-        },
-        {
-          "title": "✅ 苹果订阅取消",
-          "done": true
-        },
-        {
-          "title": "META-01 荷兰求职工签（12 动作拆解）",
-          "done": false
-        },
-        {
-          "title": "META-02 AI 副业变现体系（已出 v1）",
-          "done": true
-        },
-        {
-          "title": "🔥 FrieslandCampina BA Portal 直投",
-          "done": true
-        },
-        {
-          "title": "✅ Stolt Manager LinkedIn 冷触达",
-          "done": true
-        },
-        {
-          "title": "✅ 30 家清单补 8-10 家",
-          "done": true
-        },
-        {
-          "title": "✅ Recommendation 邮件截图入档",
-          "done": true
-        },
-        {
-          "title": "✅ Elevator Speech 平衡版 v0.2 归档",
-          "done": true
-        },
-        {
-          "title": "✅ Q01 STAR 答题",
-          "done": true
-        },
-        {
-          "title": "✅ Q04 PREP+FABE 答题",
-          "done": true
-        },
-        {
-          "title": "09-07 前累计 40+ 投递",
-          "done": false
-        },
-        {
-          "title": "10-07 前累计 60+ 投递",
-          "done": false
-        },
-        {
-          "title": "AI 副业拆解方案 v1 起草",
-          "done": false
-        },
-        {
-          "title": "💤 盘点夏鹏课模块（冻结）",
-          "done": false
-        },
-        {
-          "title": "💤 定夏鹏课周更机制（冻结）",
-          "done": false
-        }
-      ],
-      "progress_percent": null,
-      "color_token": "sand",
-      "waiting": [],
-      "is_master_todo": true
     },
     {
       "id": "p-05",
@@ -484,5 +404,83 @@ window.DASHBOARD_DATA = {
       "color_token": "sage",
       "waiting": []
     }
-  ]
+  ],
+  "todo_master": {
+    "id": "p-04",
+    "name": "待办清单（大 TODO 台账）",
+    "short_label": "TODO",
+    "domain": "d-sand",
+    "stage": "推进中",
+    "next_step": "从大台账挑今日事项进任务池",
+    "deadline": null,
+    "subtasks": [
+      {
+        "title": "✅ SYV 研究流程",
+        "done": true
+      },
+      {
+        "title": "✅ 苹果订阅取消",
+        "done": true
+      },
+      {
+        "title": "META-01 荷兰求职工签（12 动作拆解）",
+        "done": false
+      },
+      {
+        "title": "META-02 AI 副业变现体系（已出 v1）",
+        "done": true
+      },
+      {
+        "title": "🔥 FrieslandCampina BA Portal 直投",
+        "done": true
+      },
+      {
+        "title": "✅ Stolt Manager LinkedIn 冷触达",
+        "done": true
+      },
+      {
+        "title": "✅ 30 家清单补 8-10 家",
+        "done": true
+      },
+      {
+        "title": "✅ Recommendation 邮件截图入档",
+        "done": true
+      },
+      {
+        "title": "✅ Elevator Speech 平衡版 v0.2 归档",
+        "done": true
+      },
+      {
+        "title": "✅ Q01 STAR 答题",
+        "done": true
+      },
+      {
+        "title": "✅ Q04 PREP+FABE 答题",
+        "done": true
+      },
+      {
+        "title": "09-07 前累计 40+ 投递",
+        "done": false
+      },
+      {
+        "title": "10-07 前累计 60+ 投递",
+        "done": false
+      },
+      {
+        "title": "AI 副业拆解方案 v1 起草",
+        "done": false
+      },
+      {
+        "title": "💤 盘点夏鹏课模块（冻结）",
+        "done": false
+      },
+      {
+        "title": "💤 定夏鹏课周更机制（冻结）",
+        "done": false
+      }
+    ],
+    "progress_percent": null,
+    "color_token": "sand",
+    "waiting": []
+  }
 };
