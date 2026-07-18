@@ -1090,6 +1090,8 @@ button {
         </div>
         <span class="card-meta">按结果拆下一步</span>
       </div>
+      <!-- 待办清单独立区 -->
+      <section id="todo-master"></section>
       <div class="projects-grid" id="projects-grid"></div>
     </section>
 
@@ -1274,6 +1276,7 @@ function renderProjects() {
   grid.innerHTML = '';
 
   D.projects.forEach(p => {
+    if (p.id === (D.todo_master && D.todo_master.id)) return;
     const card = document.createElement('div');
     card.className = 'project-card';
     card.setAttribute('data-token', p.color_token || 'sage');
@@ -1614,6 +1617,7 @@ function renderTodoMaster() {
 function scrollToSection(evt, key) {
   const map = {
     today:    '.top-row',
+    todo:     '#todo-master',
     projects: '#projects-grid',
     master:   '.project-card.is-master',
     waiting:  '#waiting-list'
