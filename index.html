@@ -1125,7 +1125,7 @@ function renderMasterTodo() {
   const meta = document.getElementById('master-todo-meta');
   if (!el) return;
   el.innerHTML = '';
-  const p04 = (D.projects || []).find(p => p.id === 'p-04');
+  const p04 = D.todo_master || (D.projects || []).find(p => p.id === 'p-04');
   if (!p04 || !p04.subtasks || p04.subtasks.length === 0) {
     el.innerHTML = '<div class="pool-empty">待办清单空着</div>';
     if (meta) meta.textContent = '0 项';
