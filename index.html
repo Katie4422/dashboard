@@ -770,6 +770,42 @@ button {
 }
 
 
+
+/* ── Todo Master 独立区 ── */
+#todo-master {
+  margin-top: 14px; padding: 16px 18px;
+  background: var(--paper-2, #f5eeda);
+  border: 1px solid rgba(140, 120, 80, 0.18);
+  border-radius: 14px;
+}
+.tm-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.tm-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: var(--ink-1); }
+.tm-title-icon { width: 22px; height: 22px; border-radius: 6px; background: var(--token-sand, #d4a76a);
+  display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 700; }
+.tm-counts { display: flex; gap: 14px; font-size: 12px; color: var(--ink-3); }
+.tm-counts span { display: inline-flex; align-items: center; gap: 4px; }
+.tm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 860px) { .tm-grid { grid-template-columns: 1fr; } }
+.tm-col { background: rgba(255, 255, 255, 0.6); border-radius: 10px; padding: 10px 12px;
+  border: 1px solid rgba(140, 120, 80, 0.10); }
+.tm-col-head { display: flex; align-items: center; justify-content: space-between;
+  font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.6px; text-transform: uppercase;
+  margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed rgba(140, 120, 80, 0.20); }
+.tm-col-badge { background: rgba(140, 120, 80, 0.14); color: var(--ink-2); padding: 1px 6px;
+  border-radius: 10px; font-size: 10px; }
+.tm-list { display: flex; flex-direction: column; gap: 5px; }
+.tm-item { display: flex; align-items: flex-start; gap: 7px; font-size: 12px; line-height: 1.55; color: var(--ink-2); }
+.tm-dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--token-sand, #d4a76a);
+  flex-shrink: 0; margin-top: 3px; background: #fff; position: relative; }
+.tm-dot.done { background: var(--token-sand, #d4a76a); }
+.tm-dot.done::after { content: ''; position: absolute; top: 1px; left: 2px;
+  width: 4px; height: 6px; border: solid #fff; border-width: 0 1.3px 1.3px 0; transform: rotate(45deg); }
+.tm-dot.frozen { border-color: var(--ink-3); background: rgba(140,120,80,0.08); }
+.tm-item.done .tm-text { text-decoration: line-through; color: var(--ink-3); }
+.tm-item.frozen .tm-text { color: var(--ink-3); font-style: italic; }
+.tm-waiting { margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(140, 120, 80, 0.20); }
+.tm-waiting-head { font-size: 11px; font-weight: 700; color: var(--ink-3);
+  letter-spacing: 0.6px; margin-bottom: 6px; }
 /* ── Modal 层 · pilot ── */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 9998;
@@ -910,7 +946,7 @@ button {
         </span>
         <span>大 TODO</span>
       </div>
-      <div class="nav-item" onclick="scrollToSection(event, 'waiting')">
+      <div class="nav-item" onclick="scrollToSection(event, 'todo')">
         <span class="nav-icon">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10H4z"/><path d="M4 6l8 6 8-6"/></svg>
         </span>
@@ -1417,7 +1453,8 @@ function render() {
   renderSideDomains();
   renderTimeline();
   renderTasks();
-  renderProjects();
+  renderTodoMaster();
+renderProjects();
   renderWaiting();
   renderDomainsGrid();
   renderMetrics();
@@ -1491,6 +1528,63 @@ function closeProjectModal() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeProjectModal();
 });
+
+
+/* ---- Todo Master 独立区 ---- */
+function renderTodoMaster() {
+  const container = document.getElementById('todo-master');
+  if (!container) return;
+  const tm = window.DASHBOARD_DATA && window.DASHBOARD_DATA.todo_master;
+  if (!tm) { container.style.display = 'none'; return; }
+  const subs = tm.subtasks || [];
+  const doneItems = subs.filter(t => t.done);
+  const frozenItems = subs.filter(t => !t.done && /^\u{1F4A4}/u.test(t.title));
+  const activeItems = subs.filter(t => !t.done && !/^\u{1F4A4}/u.test(t.title));
+  const waiting = tm.waiting || [];
+
+  function escapeHtml(s) {
+    return (s || '').replace(/[&<>"']/g, c =>
+      ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  }
+  function makeItem(t, cls) {
+    return '<div class="tm-item ' + cls + '">'
+         + '<span class="tm-dot ' + (cls || '') + '"></span>'
+         + '<span class="tm-text">' + escapeHtml(t.title) + '</span></div>';
+  }
+
+  let html = '<div class="tm-head">';
+  html += '<div class="tm-title"><span class="tm-title-icon">T</span><span>' + escapeHtml(tm.name || '待办清单') + '</span></div>';
+  html += '<div class="tm-counts">';
+  html += '<span style="color:var(--token-sage)">✅ ' + doneItems.length + '</span>';
+  html += '<span style="color:var(--token-blue)">⬜ ' + activeItems.length + '</span>';
+  html += '<span style="color:var(--ink-3)">💤 ' + frozenItems.length + '</span>';
+  if (waiting.length > 0) html += '<span style="color:var(--token-amber)">⏳ ' + waiting.length + '</span>';
+  html += '</div></div>';
+
+  html += '<div class="tm-grid">';
+  html += '<div class="tm-col"><div class="tm-col-head"><span>✅ 已完成</span><span class="tm-col-badge">' + doneItems.length + '</span></div><div class="tm-list">';
+  if (doneItems.length === 0) html += '<div class="tm-item" style="color:var(--ink-3);font-size:11px;">暂无</div>';
+  else doneItems.forEach(t => { html += makeItem(t, 'done'); });
+  html += '</div></div>';
+  html += '<div class="tm-col"><div class="tm-col-head"><span>⬜ 待推进</span><span class="tm-col-badge">' + activeItems.length + '</span></div><div class="tm-list">';
+  if (activeItems.length === 0) html += '<div class="tm-item" style="color:var(--ink-3);font-size:11px;">暂无</div>';
+  else activeItems.forEach(t => { html += makeItem(t, ''); });
+  html += '</div></div>';
+  html += '<div class="tm-col"><div class="tm-col-head"><span>💤 冻结</span><span class="tm-col-badge">' + frozenItems.length + '</span></div><div class="tm-list">';
+  if (frozenItems.length === 0) html += '<div class="tm-item" style="color:var(--ink-3);font-size:11px;">暂无</div>';
+  else frozenItems.forEach(t => { html += makeItem(t, 'frozen'); });
+  html += '</div></div>';
+  html += '</div>';
+
+  if (waiting.length > 0) {
+    html += '<div class="tm-waiting"><div class="tm-waiting-head">WAITING LIST · ' + waiting.length + '</div>';
+    waiting.forEach(w => {
+      html += '<div class="tm-item"><span class="tm-text" style="color:var(--ink-3)">⏳ ' + escapeHtml(w.item) + '</span></div>';
+    });
+    html += '</div>';
+  }
+  container.innerHTML = html;
+}
 
 /* ---- 侧栏点击跳转 ---- */
 function scrollToSection(evt, key) {
