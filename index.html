@@ -395,6 +395,26 @@ button {
   margin-top: 4px;
 }
 
+/* ========== Waiting Section ========== */
+.waiting-section {
+  grid-column: 1 / -1;
+  margin-top: 0;
+}
+.waiting-section .waiting-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.waiting-section .waiting-empty {
+  grid-column: 1 / -1;
+  color: var(--ink-3);
+  font-size: 13px;
+  text-align: center;
+  padding: 16px;
+  opacity: 0.7;
+}
+
 .load-sub-title {
   font-size: 12px;
   color: var(--text-tertiary);
@@ -1006,7 +1026,7 @@ button {
   <main class="main">
 
     <!-- ============ 顶行：时间轴 + 今日情况 ============ -->
-    <div class="top-row">
+        <div class="top-row">
 
       <!-- 今日时间轴 -->
       <section class="card timeline">
@@ -1028,7 +1048,7 @@ button {
         <div class="timeline-body" id="timeline-body"></div>
       </section>
 
-      <!-- 今日情况 + Waiting 概览 -->
+      <!-- 今日情况 -->
       <section class="card load-card">
         <div class="card-head">
           <div class="card-head-left">
@@ -1054,14 +1074,6 @@ button {
             <div class="metric-label">已完成</div>
           </div>
         </div>
-
-        <div>
-          <div class="load-sub-title">
-            <span>等待中 · Waiting List</span>
-            <span id="waiting-count">0</span>
-          </div>
-          <div class="waiting-list" id="waiting-list"></div>
-        </div>
       </section>
     </div>
 
@@ -1079,6 +1091,9 @@ button {
       <div id="task-list"></div>
     </section>
 
+    <!-- ============ 待办清单（独立区） ============ -->
+    <section id="todo-master"></section>
+
     <!-- ============ 项目推进 ============ -->
     <section class="card projects-section">
       <div class="card-head">
@@ -1090,9 +1105,24 @@ button {
         </div>
         <span class="card-meta">按结果拆下一步</span>
       </div>
-      <!-- 待办清单独立区 -->
-      <section id="todo-master"></section>
       <div class="projects-grid" id="projects-grid"></div>
+    </section>
+
+    <!-- ============ 等待中 Waiting List ============ -->
+    <section class="card waiting-section">
+      <div class="card-head">
+        <div class="card-head-left">
+          <span class="card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
+          <span class="card-title">等待中 Waiting List</span>
+        </div>
+        <span class="card-meta" id="waiting-count-meta">0 条</span>
+      </div>
+      <div class="waiting-list" id="waiting-list"></div>
     </section>
 
     <!-- ============ 领域仪表盘 ============ -->
@@ -1343,7 +1373,7 @@ function renderProjects() {
 /* ---- Waiting 汇总 ---- */
 function renderWaiting() {
   const list = document.getElementById('waiting-list');
-  const cnt = document.getElementById('waiting-count');
+  const cnt = document.getElementById('waiting-count') || null;
   list.innerHTML = '';
 
   const items = [];
@@ -1352,7 +1382,9 @@ function renderWaiting() {
       items.push({ ...w, project_name: p.name, project_id: p.id });
     });
   });
-  cnt.textContent = items.length;
+  if (cnt) cnt.textContent = items.length;
+  const metaEl = document.getElementById('waiting-count-meta');
+  if (metaEl) metaEl.textContent = items.length + ' 条';
   document.getElementById('side-wait').textContent = items.length;
 
   if (items.length === 0) {
