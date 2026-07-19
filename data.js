@@ -11,7 +11,11 @@ window.DASHBOARD_DATA = {
   // ================= 4 个领域（左侧侧栏 + 底部仪表盘） =================
   // ================= 待办清单（大 TODO 台账，独立于项目卡） =================
   todo_master: {
-    id: "p-04",
+    intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
+      id: "p-04",
     name: "待办清单（大 TODO 台账）",
     subtasks: [
       { title: "✅ SYV 研究流程", done: true },
@@ -56,6 +60,10 @@ window.DASHBOARD_DATA = {
   // ================= 项目（19 个 + 大 TODO） =================
   projects: [
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-01",
       name: "书籍+播客+见闻→思考",
       short_label: "书",
@@ -69,6 +77,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-02",
       name: "形象管理",
       short_label: "形",
@@ -82,6 +94,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-03",
       name: "求职底层世界观",
       short_label: "求",
@@ -95,6 +111,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-05",
       name: "拆解一切",
       short_label: "拆",
@@ -108,6 +128,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-06",
       name: "健康饮食",
       short_label: "健",
@@ -121,6 +145,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-07",
       name: "财富中心",
       short_label: "财",
@@ -134,6 +162,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-08",
       name: "关于我",
       short_label: "我",
@@ -147,6 +179,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-09",
       name: "我的美好人生",
       short_label: "美",
@@ -160,6 +196,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-10",
       name: "逻辑 & 表达",
       short_label: "逻",
@@ -173,6 +213,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-11",
       name: "English 日常陪练",
       short_label: "E陪",
@@ -186,6 +230,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-12",
       name: "商业分析案例",
       short_label: "商",
@@ -199,6 +247,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-13",
       name: "AI 学习",
       short_label: "AI",
@@ -212,6 +264,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-14",
       name: "日记 & 人生导师",
       short_label: "日",
@@ -225,6 +281,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-15",
       name: "English Learning",
       short_label: "E学",
@@ -244,6 +304,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-16",
       name: "Decision Life",
       short_label: "D",
@@ -257,6 +321,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-17",
       name: "心理分析",
       short_label: "心",
@@ -270,6 +338,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-18",
       name: "国内 backup",
       short_label: "备",
@@ -283,6 +355,10 @@ window.DASHBOARD_DATA = {
       waiting: []
     },
     {
+      intro: "",
+      sop: [],
+      review_cycle: "",
+      progress_status: "",
       id: "p-19",
       name: "职场教练 skill",
       short_label: "职",
