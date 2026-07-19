@@ -498,6 +498,34 @@ button {
   gap: 14px;
 }
 
+/* --- 分组标题 --- */
+.project-group {
+  grid-column: 1 / -1;
+  padding-top: 12px;
+}
+.project-group:first-child {
+  padding-top: 0;
+}
+.project-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-hairline);
+}
+.project-group-label {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+.project-group-count {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: var(--font-num);
+}
+
 .project-card {
   background: var(--bg-card);
   border-radius: var(--radius-card);
@@ -1053,7 +1081,7 @@ button {
   </main>
 </div>
 
-<script src="data.js?v=20260719d"></script>
+<script src="data.js?v=20260720a"></script>
 <script>
 /* =================================================================
  * 渲染逻辑
@@ -1247,65 +1275,90 @@ function renderProjects() {
   const grid = document.getElementById('projects-grid');
   grid.innerHTML = '';
 
+  // 分组顺序
+  const CATEGORY_ORDER = ['其他', '自我', '学习', '求职', '练习', '工具'];
+
+  // 按 category 分组
+  const groups = {};
+  CATEGORY_ORDER.forEach(c => groups[c] = []);
   D.projects.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    card.onclick = () => showProjectDetail(p.id);
-    card.setAttribute('data-token', p.color_token || 'sage');
-    if (p.is_master_todo) card.classList.add('is-master');
+    const cat = p.category || '其他';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(p);
+  });
 
-    const percent = (p.progress_percent != null) ? p.progress_percent : null;
-    const stageText = p.stage || '—';
-    const label = p.short_label || (p.name || '').slice(0, 1);
+  // 渲染每个分组
+  CATEGORY_ORDER.forEach(cat => {
+    const projects = groups[cat];
+    if (!projects || projects.length === 0) return;
 
-    const waitBadge = (p.waiting && p.waiting.length > 0)
-      ? `<span class="project-waiting-badge">Waiting ${p.waiting.length}</span>`
-      : '';
+    // 分组标题
+    const groupEl = document.createElement('div');
+    groupEl.className = 'project-group';
+    groupEl.innerHTML = `<div class="project-group-header"><span class="project-group-label">${escapeHtml(cat)}</span><span class="project-group-count">${projects.length} 个项目</span></div>`;
+    grid.appendChild(groupEl);
 
-    const subtaskHtml = (p.subtasks && p.subtasks.length > 0) ? `
-      <div class="project-subtasks">
-        ${p.subtasks.map(s => `
-          <div class="subtask-dot ${s.done ? 'done' : ''}">
-            <span class="dot"></span>
-            <span class="subtask-label">${escapeHtml(s.title)}</span>
+    // 分组内项目卡片
+    projects.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.onclick = () => showProjectDetail(p.id);
+      card.setAttribute('data-token', p.color_token || 'sage');
+      if (p.is_master_todo) card.classList.add('is-master');
+
+      const percent = (p.progress_percent != null) ? p.progress_percent : null;
+      const stageText = p.stage || '—';
+      const label = p.short_label || (p.name || '').slice(0, 1);
+
+      const waitBadge = (p.waiting && p.waiting.length > 0)
+        ? `<span class="project-waiting-badge">Waiting ${p.waiting.length}</span>`
+        : '';
+
+      const subtaskHtml = (p.subtasks && p.subtasks.length > 0) ? `
+        <div class="project-subtasks">
+          ${p.subtasks.map(s => `
+            <div class="subtask-dot ${s.done ? 'done' : ''}">
+              <span class="dot"></span>
+              <span class="subtask-label">${escapeHtml(s.title)}</span>
+            </div>
+          `).join('')}
+        </div>` : '';
+
+      const rightSide = (percent != null)
+        ? `<span class="project-percent">${percent}%</span>`
+        : `<span class="project-stage">${escapeHtml(stageText)}</span>`;
+
+      const progressBar = (percent != null) ? `
+        <div class="project-progress">
+          <div class="project-progress-fill" style="width:${percent}%"></div>
+        </div>` : '';
+
+      const masterHint = p.is_master_todo ? `
+        <div class="master-hint">大台账入口 · 从这里挑今日事项到任务池</div>` : '';
+
+      const nextStep = p.next_step
+        ? `<span class="next-value">${escapeHtml(p.next_step)}</span>`
+        : `<span class="next-value empty">下一步待定</span>`;
+
+      card.innerHTML = `
+        ${waitBadge}
+        <div class="project-card-head">
+          <div class="project-card-left">
+            <span class="project-icon ${label.length >= 3 ? 'small-text' : ''}" data-token="${p.color_token}">${escapeHtml(label)}</span>
+            <span class="project-name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</span>
           </div>
-        `).join('')}
-      </div>` : '';
-
-    const rightSide = (percent != null)
-      ? `<span class="project-percent">${percent}%</span>`
-      : `<span class="project-stage">${escapeHtml(stageText)}</span>`;
-
-    const progressBar = (percent != null) ? `
-      <div class="project-progress">
-        <div class="project-progress-fill" style="width:${percent}%"></div>
-      </div>` : '';
-
-    const masterHint = p.is_master_todo ? `
-      <div class="master-hint">大台账入口 · 从这里挑今日事项到任务池</div>` : '';
-
-    const nextStep = p.next_step
-      ? `<span class="next-value">${escapeHtml(p.next_step)}</span>`
-      : `<span class="next-value empty">下一步待定</span>`;
-
-    card.innerHTML = `
-      ${waitBadge}
-      <div class="project-card-head">
-        <div class="project-card-left">
-          <span class="project-icon ${label.length >= 3 ? 'small-text' : ''}" data-token="${p.color_token}">${escapeHtml(label)}</span>
-          <span class="project-name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</span>
+          ${rightSide}
         </div>
-        ${rightSide}
-      </div>
-      ${progressBar}
-      ${subtaskHtml}
-      ${masterHint}
-      <div class="project-next">
-        <span class="next-label">下一步</span>
-        ${nextStep}
-      </div>
-    `;
-    grid.appendChild(card);
+        ${progressBar}
+        ${subtaskHtml}
+        ${masterHint}
+        <div class="project-next">
+          <span class="next-label">下一步</span>
+          ${nextStep}
+        </div>
+      `;
+      grid.appendChild(card);
+    });
   });
 }
 
