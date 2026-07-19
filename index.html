@@ -10,41 +10,54 @@
   <style>
 /* ==========================================================
  * 个人生活看板 v2 - 视觉样式表
- * 风格：日系简约 OS-Dashboard（编辑感 · 莫兰迪 · 大留白）
+ * 风格：日系简约 OS-Dashboard（明媚春日 · 鲜活 · 通透）
  * ========================================================== */
 
 /* -------- 色板 & 变量 -------- */
 :root {
-  --bg-page: #EDE8DE;
-  --bg-panel: #F5F1EA;
-  --bg-card: #FDFBF7;
-  --bg-card-hover: #FBF8F2;
+  /* 背景层：更亮更通透 */
+  --bg-page: #FAF8F3;
+  --bg-panel: #F5F2EC;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FBFBFA;
 
-  --text-primary: #3F403D;
-  --text-secondary: #77786F;
-  --text-tertiary: #A5A497;
+  /* 文字层：对比更清晰 */
+  --text-primary: #2D3436;
+  --text-secondary: #636E72;
+  --text-tertiary: #A0A8AD;
 
-  --border-soft: #DDD8CF;
-  --border-hairline: #E8E3DA;
+  /* 边框层：更轻盈 */
+  --border-soft: #E5DFD3;
+  --border-hairline: #EDE8E0;
 
-  --token-sage: #7A8A76;
-  --token-sage-soft: #B8C1B0;
-  --token-blue: #7A8790;
-  --token-blue-soft: #B4BDC4;
-  --token-pink: #B08A85;
-  --token-pink-soft: #D4BFB9;
-  --token-sand: #B89870;
-  --token-sand-soft: #D9C4A2;
+  /* 领域色：更鲜活饱满 */
+  --token-sage: #3CB371;
+  --token-sage-soft: #B8E6CE;
+  --token-blue: #4A90D9;
+  --token-blue-soft: #C5DDF5;
+  --token-pink: #E86B8A;
+  --token-pink-soft: #F5CDD6;
+  --token-sand: #E8A838;
+  --token-sand-soft: #F5DBA8;
 
-  --token-work: #5F7460;
-  --token-media: #A05E4A;
-  --token-life: #C8A76A;
+  /* 功能色 */
+  --token-work: #2ECC71;
+  --token-media: #E67E22;
+  --token-life: #F1C40F;
 
-  --shadow-card: 0 1px 2px rgba(63, 64, 61, 0.03), 0 2px 8px rgba(63, 64, 61, 0.04);
-  --shadow-brand: 0 2px 6px rgba(63, 64, 61, 0.06);
+  /* 弹窗用 ink 变量 */
+  --ink-1: #2D3436;
+  --ink-2: #636E72;
+  --ink-3: #A0A8AD;
+  --surface: #FFFFFF;
+  --hover: rgba(0,0,0,0.04);
+  --line: #EDE8E0;
 
-  --radius-card: 10px;
-  --radius-sm: 6px;
+  --shadow-card: 0 1px 3px rgba(45, 52, 54, 0.04), 0 4px 12px rgba(45, 52, 54, 0.06);
+  --shadow-brand: 0 2px 8px rgba(45, 52, 54, 0.08);
+
+  --radius-card: 12px;
+  --radius-sm: 8px;
   --radius-pill: 999px;
 
   --font-serif: "Songti SC", "STSong", "SimSun", "Noto Serif SC", serif;
@@ -691,7 +704,7 @@ button {
 
 /* 大 TODO 台账特殊底色 */
 .project-card.is-master {
-  background: linear-gradient(180deg, #F6EEE0 0%, #FCF6E9 100%);
+  background: linear-gradient(180deg, #F0EDE6 0%, #FAF8F3 100%);
   border: 1px dashed var(--token-sand);
   box-shadow: none;
 }
@@ -1393,13 +1406,13 @@ function showProjectDetail(pid) {
 
   // 颜色映射：颜色 → {主色, 浅底, 极浅底}
   const colorMap = {
-    sage:  { main: '#7d9a84', light: 'rgba(125,154,132,.10)', pale: 'rgba(125,154,132,.05)' },
-    blue:  { main: '#6b819a', light: 'rgba(107,129,154,.10)', pale: 'rgba(107,129,154,.05)' },
-    pink:  { main: '#c08791', light: 'rgba(192,135,145,.10)', pale: 'rgba(192,135,145,.05)' },
-    sand:  { main: '#c2a57b', light: 'rgba(194,165,123,.10)', pale: 'rgba(194,165,123,.05)' },
-    clay:  { main: '#b5836d', light: 'rgba(181,131,109,.10)', pale: 'rgba(181,131,109,.05)' },
-    slate: { main: '#6b819a', light: 'rgba(107,129,154,.10)', pale: 'rgba(107,129,154,.05)' },
-    rose:  { main: '#c08791', light: 'rgba(192,135,145,.10)', pale: 'rgba(192,135,145,.05)' },
+    sage:  { main: '#3CB371', light: 'rgba(60,179,113,.10)', pale: 'rgba(60,179,113,.05)' },
+    blue:  { main: '#4A90D9', light: 'rgba(74,144,217,.10)', pale: 'rgba(74,144,217,.05)' },
+    pink:  { main: '#E86B8A', light: 'rgba(232,107,138,.10)', pale: 'rgba(232,107,138,.05)' },
+    sand:  { main: '#E8A838', light: 'rgba(232,168,56,.10)', pale: 'rgba(232,168,56,.05)' },
+    clay:  { main: '#E67E22', light: 'rgba(230,126,34,.10)', pale: 'rgba(230,126,34,.05)' },
+    slate: { main: '#4A90D9', light: 'rgba(74,144,217,.10)', pale: 'rgba(74,144,217,.05)' },
+    rose:  { main: '#E86B8A', light: 'rgba(232,107,138,.10)', pale: 'rgba(232,107,138,.05)' },
   };
   const c = colorMap[p.color_token] || colorMap.sage;
 
@@ -1690,5 +1703,5 @@ function scrollToSection(evt, key) {
   </div>
 </div>
 </body>
-<!-- cache bust v20260720e -->
+<!-- cache bust v20260720f -->
 </html>
