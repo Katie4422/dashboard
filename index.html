@@ -31,14 +31,14 @@
   --border-hairline: #F0E0F5;
 
   /* 领域色：柔和淡彩 · 搭配薰衣草紫 */
-  --token-sage: #6EC6B0;
-  --token-sage-soft: #C8EBE0;
-  --token-blue: #7DADE2;
-  --token-blue-soft: #D0E3F5;
+  --token-sage: #8DD8C8;
+  --token-sage-soft: #D4F0E8;
+  --token-blue: #9DC2EB;
+  --token-blue-soft: #D9E9F7;
   --token-pink: #F0A0BA;
   --token-pink-soft: #F8D5E2;
-  --token-sand: #F5BE5E;
-  --token-sand-soft: #FADEB5;
+  --token-sand: #F8D48E;
+  --token-sand-soft: #FCEAC8;
 
   /* 功能色 */
   --token-work: #2ECC71;
@@ -1406,12 +1406,12 @@ function showProjectDetail(pid) {
 
   // 颜色映射：颜色 → {主色, 浅底, 极浅底}
   const colorMap = {
-    sage:  { main: '#6EC6B0', light: 'rgba(110,198,176,.10)', pale: 'rgba(110,198,176,.05)' },
-    blue:  { main: '#7DADE2', light: 'rgba(125,173,226,.10)', pale: 'rgba(125,173,226,.05)' },
+    sage:  { main: '#8DD8C8', light: 'rgba(141,216,200,.10)', pale: 'rgba(141,216,200,.05)' },
+    blue:  { main: '#9DC2EB', light: 'rgba(157,194,235,.10)', pale: 'rgba(157,194,235,.05)' },
     pink:  { main: '#F0A0BA', light: 'rgba(240,160,186,.10)', pale: 'rgba(240,160,186,.05)' },
-    sand:  { main: '#F5BE5E', light: 'rgba(245,190,94,.10)', pale: 'rgba(245,190,94,.05)' },
+    sand:  { main: '#F8D48E', light: 'rgba(248,212,142,.10)', pale: 'rgba(248,212,142,.05)' },
     clay:  { main: '#E67E22', light: 'rgba(230,126,34,.10)', pale: 'rgba(230,126,34,.05)' },
-    slate: { main: '#7DADE2', light: 'rgba(125,173,226,.10)', pale: 'rgba(125,173,226,.05)' },
+    slate: { main: '#9DC2EB', light: 'rgba(157,194,235,.10)', pale: 'rgba(157,194,235,.05)' },
     rose:  { main: '#F0A0BA', light: 'rgba(240,160,186,.10)', pale: 'rgba(240,160,186,.05)' },
   };
   const c = colorMap[p.color_token] || colorMap.sage;
@@ -1703,5 +1703,5 @@ function scrollToSection(evt, key) {
   </div>
 </div>
 </body>
-<!-- cache bust v20260720j -->
+<!-- cache bust v20260720k -->
 </html>
