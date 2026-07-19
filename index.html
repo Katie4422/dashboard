@@ -1342,57 +1342,17 @@ function renderProjects() {
       card.className = 'project-card';
       card.onclick = () => showProjectDetail(p.id);
       card.setAttribute('data-token', p.color_token || 'sage');
-      if (p.is_master_todo) card.classList.add('is-master');
 
-      const percent = (p.progress_percent != null) ? p.progress_percent : null;
       const stageText = p.stage || '—';
       const label = p.short_label || (p.name || '').slice(0, 1);
 
-      const waitBadge = (p.waiting && p.waiting.length > 0)
-        ? `<span class="project-waiting-badge">Waiting ${p.waiting.length}</span>`
-        : '';
-
-      const subtaskHtml = (p.subtasks && p.subtasks.length > 0) ? `
-        <div class="project-subtasks">
-          ${p.subtasks.map(s => `
-            <div class="subtask-dot ${s.done ? 'done' : ''}">
-              <span class="dot"></span>
-              <span class="subtask-label">${escapeHtml(s.title)}</span>
-            </div>
-          `).join('')}
-        </div>` : '';
-
-      const rightSide = (percent != null)
-        ? `<span class="project-percent">${percent}%</span>`
-        : `<span class="project-stage">${escapeHtml(stageText)}</span>`;
-
-      const progressBar = (percent != null) ? `
-        <div class="project-progress">
-          <div class="project-progress-fill" style="width:${percent}%"></div>
-        </div>` : '';
-
-      const masterHint = p.is_master_todo ? `
-        <div class="master-hint">大台账入口 · 从这里挑今日事项到任务池</div>` : '';
-
-      const nextStep = p.next_step
-        ? `<span class="next-value">${escapeHtml(p.next_step)}</span>`
-        : `<span class="next-value empty">下一步待定</span>`;
-
       card.innerHTML = `
-        ${waitBadge}
         <div class="project-card-head">
           <div class="project-card-left">
             <span class="project-icon ${label.length >= 3 ? 'small-text' : ''}" data-token="${p.color_token}">${escapeHtml(label)}</span>
             <span class="project-name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</span>
           </div>
-          ${rightSide}
-        </div>
-        ${progressBar}
-        ${subtaskHtml}
-        ${masterHint}
-        <div class="project-next">
-          <span class="next-label">下一步</span>
-          ${nextStep}
+          <span class="project-stage">${escapeHtml(stageText)}</span>
         </div>
       `;
       grid.appendChild(card);
@@ -1704,5 +1664,5 @@ function scrollToSection(evt, key) {
   </div>
 </div>
 </body>
-<!-- cache bust v20260720c -->
+<!-- cache bust v20260720d -->
 </html>
