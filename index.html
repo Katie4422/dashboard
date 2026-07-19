@@ -904,6 +904,24 @@ button {
 .modal-progress-value { font-size: 14px; color: var(--ink-1); line-height: 1.5; }
 .project-card { cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
 .project-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+
+/* 卡片底部 meta 信息（复盘周期 + 当前进度） */
+.project-card-meta {
+  display: flex; flex-direction: column; gap: 4px;
+  margin-top: 10px; padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.card-meta-item {
+  display: flex; align-items: baseline; gap: 6px;
+  font-size: 12px; line-height: 1.4;
+}
+.card-meta-label {
+  color: var(--ink-3); font-weight: 600;
+  min-width: 28px; flex-shrink: 0;
+}
+.card-meta-value {
+  color: var(--ink-2);
+}
 </style>
 </head>
 <body>
@@ -1345,6 +1363,10 @@ function renderProjects() {
 
       const stageText = p.stage || '—';
       const label = p.short_label || (p.name || '').slice(0, 1);
+      const review = p.review_cycle || '未设定';
+      const status = p.progress_status || '—';
+      // 截取前30字避免卡片太长
+      const statusShort = status.length > 30 ? status.slice(0, 30) + '…' : status;
 
       card.innerHTML = `
         <div class="project-card-head">
@@ -1353,6 +1375,10 @@ function renderProjects() {
             <span class="project-name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</span>
           </div>
           <span class="project-stage">${escapeHtml(stageText)}</span>
+        </div>
+        <div class="project-card-meta">
+          <span class="card-meta-item"><span class="card-meta-label">复盘</span><span class="card-meta-value">${escapeHtml(review)}</span></span>
+          <span class="card-meta-item"><span class="card-meta-label">进度</span><span class="card-meta-value">${escapeHtml(statusShort)}</span></span>
         </div>
       `;
       grid.appendChild(card);
@@ -1664,5 +1690,5 @@ function scrollToSection(evt, key) {
   </div>
 </div>
 </body>
-<!-- cache bust v20260720d -->
+<!-- cache bust v20260720e -->
 </html>
