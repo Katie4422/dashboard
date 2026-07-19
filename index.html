@@ -803,70 +803,105 @@ button {
 
 /* ===== 项目详情弹窗 ===== */
 .modal-overlay {
-  position: fixed; inset: 0; background: rgba(20, 20, 25, 0.55);
-  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  position: fixed; inset: 0; background: rgba(20, 20, 25, 0.60);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   display: none; align-items: center; justify-content: center;
   z-index: 999; padding: 24px;
 }
 .modal-overlay.open { display: flex; }
 .modal-card {
-  background: var(--surface); border-radius: 16px;
-  width: 100%; max-width: 680px; max-height: 85vh;
-  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  background: var(--surface); border-radius: 20px;
+  width: 100%; max-width: 640px; max-height: 82vh;
+  box-shadow: 0 24px 80px rgba(0,0,0,.30), 0 0 0 1px rgba(255,255,255,.04);
   display: flex; flex-direction: column; overflow: hidden;
+  animation: modalSlideIn .22s cubic-bezier(.16,1,.3,1);
 }
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(16px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 顶部彩色条 */
+.modal-accent-bar {
+  height: 4px; border-radius: 20px 20px 0 0;
+  background: var(--modal-accent, var(--ink-3));
+}
+
 .modal-head {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 24px; border-bottom: 1px solid var(--line);
+  padding: 20px 28px 16px;
 }
-.modal-title-row { display: flex; align-items: center; gap: 12px; }
+.modal-title-row { display: flex; align-items: center; gap: 14px; }
 .modal-icon {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: var(--ink-3); color: #fff;
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--modal-accent-bg, var(--ink-3)); color: #fff;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 14px;
+  font-weight: 700; font-size: 16px; letter-spacing: -0.02em;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
 }
-.modal-title { font-weight: 700; font-size: 16px; color: var(--ink-1); }
+.modal-title-group { display: flex; flex-direction: column; gap: 4px; }
+.modal-title { font-weight: 700; font-size: 18px; color: var(--ink-1); line-height: 1.3; }
+.modal-stage-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 600; padding: 2px 10px;
+  border-radius: 100px; background: var(--modal-accent-bg-light, rgba(0,0,0,.06));
+  color: var(--modal-accent, var(--ink-3));
+  width: fit-content;
+}
 .modal-close {
-  background: none; border: none; font-size: 18px; cursor: pointer;
-  color: var(--ink-3); padding: 4px 8px; border-radius: 6px;
+  background: none; border: none; font-size: 20px; cursor: pointer;
+  color: var(--ink-3); padding: 6px 10px; border-radius: 8px;
+  transition: background .15s, color .15s;
 }
 .modal-close:hover { background: var(--hover); color: var(--ink-1); }
+
 .modal-body {
-  padding: 20px 24px; overflow-y: auto; flex: 1;
+  padding: 4px 28px 28px; overflow-y: auto; flex: 1;
 }
-.modal-section { margin-bottom: 20px; }
-.modal-section:last-child { margin-bottom: 0; }
+
+/* 段落卡片 */
+.modal-section {
+  margin-top: 20px; padding: 16px 18px;
+  background: var(--bg-panel, rgba(0,0,0,.02));
+  border-radius: 12px;
+  border-left: 3px solid var(--modal-accent, var(--ink-3));
+}
+.modal-section:first-child { margin-top: 8px; }
 .modal-section-title {
   font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--ink-3); margin-bottom: 8px;
-  display: flex; align-items: center; gap: 6px;
-}
-.modal-section-title::before {
-  content: ''; width: 3px; height: 12px; border-radius: 2px;
-  background: var(--accent, var(--ink-2)); display: inline-block;
+  letter-spacing: 0.1em; color: var(--modal-accent, var(--ink-3));
+  margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
 }
 .modal-section-content {
-  font-size: 14px; line-height: 1.65; color: var(--ink-1);
+  font-size: 14px; line-height: 1.7; color: var(--ink-1);
 }
-.modal-empty { color: var(--ink-3); font-style: italic; font-size: 13px; }
+.modal-empty { color: var(--ink-3); font-style: italic; font-size: 13px; opacity: .7; }
+
+/* SOP 步骤列表 */
 .modal-sop-list {
   list-style: none; padding: 0; margin: 0;
   counter-reset: sop;
 }
 .modal-sop-list li {
   counter-increment: sop; position: relative;
-  padding: 8px 0 8px 32px; font-size: 13px; line-height: 1.5;
-  border-left: 2px solid var(--line); margin-left: 8px;
+  padding: 6px 0 6px 36px; font-size: 13.5px; line-height: 1.55;
+  color: var(--ink-1);
 }
-.modal-sop-list li:last-child { border-left-color: transparent; }
 .modal-sop-list li::before {
-  content: counter(sop); position: absolute; left: -12px; top: 6px;
-  width: 22px; height: 22px; border-radius: 50%;
-  background: var(--surface); border: 2px solid var(--accent, var(--ink-2));
-  color: var(--ink-2); font-size: 11px; font-weight: 700;
+  content: counter(sop); position: absolute; left: 0; top: 4px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--modal-accent-bg, var(--ink-3));
+  color: #fff; font-size: 11px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
 }
+
+/* 进度条目 */
+.modal-progress-row { display: flex; gap: 10px; align-items: baseline; margin-bottom: 6px; }
+.modal-progress-label {
+  font-size: 12px; font-weight: 600; color: var(--ink-3);
+  min-width: 52px; flex-shrink: 0;
+}
+.modal-progress-value { font-size: 14px; color: var(--ink-1); line-height: 1.5; }
 .project-card { cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
 .project-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
 </style>
@@ -1279,7 +1314,7 @@ function renderProjects() {
   grid.innerHTML = '';
 
   // 分组顺序
-  const CATEGORY_ORDER = ['其他', '自我', '学习', '求职', '练习', '工具'];
+  const CATEGORY_ORDER = ['求职', '工具', '学习', '自我', '练习', '其他'];
 
   // 按 category 分组
   const groups = {};
@@ -1369,15 +1404,51 @@ function showProjectDetail(pid) {
   const p = D.projects.find(x => x.id === pid);
   if (!p) return;
   const overlay = document.getElementById('project-modal');
+
+  // 颜色映射：颜色 → {主色, 浅底, 极浅底}
+  const colorMap = {
+    sage:  { main: '#7d9a84', light: 'rgba(125,154,132,.10)', pale: 'rgba(125,154,132,.05)' },
+    blue:  { main: '#6b819a', light: 'rgba(107,129,154,.10)', pale: 'rgba(107,129,154,.05)' },
+    pink:  { main: '#c08791', light: 'rgba(192,135,145,.10)', pale: 'rgba(192,135,145,.05)' },
+    sand:  { main: '#c2a57b', light: 'rgba(194,165,123,.10)', pale: 'rgba(194,165,123,.05)' },
+    clay:  { main: '#b5836d', light: 'rgba(181,131,109,.10)', pale: 'rgba(181,131,109,.05)' },
+    slate: { main: '#6b819a', light: 'rgba(107,129,154,.10)', pale: 'rgba(107,129,154,.05)' },
+    rose:  { main: '#c08791', light: 'rgba(192,135,145,.10)', pale: 'rgba(192,135,145,.05)' },
+  };
+  const c = colorMap[p.color_token] || colorMap.sage;
+
+  // 设置 CSS 变量（顶部色条 + icon 背景 + section 左边框）
+  const card = document.getElementById('modal-card');
+  card.style.setProperty('--modal-accent', c.main);
+  card.style.setProperty('--modal-accent-bg', c.main);
+  card.style.setProperty('--modal-accent-bg-light', c.light);
+
+  // 顶部色条
+  document.getElementById('modal-accent-bar').style.background = c.main;
+
+  // 标题
   document.getElementById('modal-title').textContent = p.name;
   const icon = document.getElementById('modal-icon');
-  icon.textContent = (p.short_label || p.name.slice(0,1)).toUpperCase();
-  icon.setAttribute('data-token', p.color_token || 'sage');
+  icon.textContent = (p.short_label || p.name.slice(0,1));
+  icon.style.background = c.main;
+
+  // 阶段徽章
+  const badge = document.getElementById('modal-stage-badge');
+  if (p.stage) {
+    badge.textContent = p.stage;
+    badge.style.display = 'inline-flex';
+    badge.style.background = c.light;
+    badge.style.color = c.main;
+  } else {
+    badge.style.display = 'none';
+  }
 
   const empty = (v) => !v || (Array.isArray(v) && v.length === 0);
-  const sec = (title, content, accent) => `
+
+  // 渲染 section：section(title, content)
+  const sec = (title, content) => `
     <div class="modal-section">
-      <div class="modal-section-title" style="--accent:${accent || 'var(--ink-2)'}">${title}</div>
+      <div class="modal-section-title">${title}</div>
       <div class="modal-section-content">${content}</div>
     </div>`;
 
@@ -1385,7 +1456,8 @@ function showProjectDetail(pid) {
   const introHtml = empty(p.intro)
     ? '<div class="modal-empty">待填写</div>'
     : escapeHtml(p.intro).replace(/\n/g, '<br>');
-  // 2. SOP
+
+  // 2. SOP 流程
   let sopHtml;
   if (empty(p.sop)) {
     sopHtml = '<div class="modal-empty">待填写</div>';
@@ -1394,27 +1466,26 @@ function showProjectDetail(pid) {
   } else {
     sopHtml = `<ol class="modal-sop-list">${p.sop.map(s => `<li>${escapeHtml(s)}</li>`).join('')}</ol>`;
   }
+
   // 3. 复盘迭代周期
   const reviewHtml = empty(p.review_cycle)
     ? '<div class="modal-empty">待填写</div>'
     : escapeHtml(p.review_cycle).replace(/\n/g, '<br>');
-  // 4. 当前进度
+
+  // 4. 当前进度（使用 label/value 行布局）
   const progressParts = [];
-  if (p.stage) progressParts.push(`<div><strong>阶段：</strong>${escapeHtml(p.stage)}</div>`);
-  if (p.next_step) progressParts.push(`<div><strong>下一步：</strong>${escapeHtml(p.next_step)}</div>`);
-  if (!empty(p.progress_status)) progressParts.push(`<div style="margin-top:6px">${escapeHtml(p.progress_status).replace(/\n/g, '<br>')}</div>`);
+  if (p.stage) progressParts.push(`<div class="modal-progress-row"><span class="modal-progress-label">阶段</span><span class="modal-progress-value">${escapeHtml(p.stage)}</span></div>`);
+  if (p.next_step) progressParts.push(`<div class="modal-progress-row"><span class="modal-progress-label">下一步</span><span class="modal-progress-value">${escapeHtml(p.next_step)}</span></div>`);
+  if (!empty(p.progress_status)) progressParts.push(`<div style="margin-top:8px">${escapeHtml(p.progress_status).replace(/\n/g, '<br>')}</div>`);
   const progressHtml = progressParts.length === 0
     ? '<div class="modal-empty">待填写</div>'
     : progressParts.join('');
 
-  const colorMap = { sage:'#7d9a84', sand:'#c2a57b', clay:'#b5836d', slate:'#6b819a', rose:'#c08791' };
-  const accent = colorMap[p.color_token] || 'var(--ink-2)';
-
   document.getElementById('modal-body').innerHTML =
-    sec('简介', introHtml, accent) +
-    sec('SOP 流程', sopHtml, accent) +
-    sec('复盘迭代周期', reviewHtml, accent) +
-    sec('当前进度', progressHtml, accent);
+    sec('简介', introHtml) +
+    sec('SOP 流程', sopHtml) +
+    sec('复盘迭代周期', reviewHtml) +
+    sec('当前进度', progressHtml);
 
   overlay.classList.add('open');
 }
@@ -1617,11 +1688,15 @@ function scrollToSection(evt, key) {
 
 <!-- 项目详情弹窗 -->
 <div class="modal-overlay" id="project-modal" onclick="if(event.target===this)closeProjectModal()">
-  <div class="modal-card">
+  <div class="modal-card" id="modal-card">
+    <div class="modal-accent-bar" id="modal-accent-bar"></div>
     <div class="modal-head">
       <div class="modal-title-row">
         <span class="modal-icon" id="modal-icon"></span>
-        <span class="modal-title" id="modal-title"></span>
+        <div class="modal-title-group">
+          <span class="modal-title" id="modal-title"></span>
+          <span class="modal-stage-badge" id="modal-stage-badge"></span>
+        </div>
       </div>
       <button class="modal-close" onclick="closeProjectModal()">✕</button>
     </div>
