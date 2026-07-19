@@ -30,15 +30,15 @@
   --border-soft: #E1BEE7;
   --border-hairline: #F0E0F5;
 
-  /* 领域色：薰衣草紫搭配 · 鲜活有生命力 */
-  --token-sage: #1ABC9C;
-  --token-sage-soft: #A3E4D7;
-  --token-blue: #5B86E5;
-  --token-blue-soft: #C5D5F5;
-  --token-pink: #E84393;
-  --token-pink-soft: #F8C5DB;
-  --token-sand: #F5A623;
-  --token-sand-soft: #FADBA3;
+  /* 领域色：柔和淡彩 · 搭配薰衣草紫 */
+  --token-sage: #6EC6B0;
+  --token-sage-soft: #C8EBE0;
+  --token-blue: #7DADE2;
+  --token-blue-soft: #D0E3F5;
+  --token-pink: #F0A0BA;
+  --token-pink-soft: #F8D5E2;
+  --token-sand: #F5BE5E;
+  --token-sand-soft: #FADEB5;
 
   /* 功能色 */
   --token-work: #2ECC71;
@@ -1406,13 +1406,13 @@ function showProjectDetail(pid) {
 
   // 颜色映射：颜色 → {主色, 浅底, 极浅底}
   const colorMap = {
-    sage:  { main: '#1ABC9C', light: 'rgba(26,188,156,.10)', pale: 'rgba(26,188,156,.05)' },
-    blue:  { main: '#5B86E5', light: 'rgba(91,134,229,.10)', pale: 'rgba(91,134,229,.05)' },
-    pink:  { main: '#E84393', light: 'rgba(232,67,147,.10)', pale: 'rgba(232,67,147,.05)' },
-    sand:  { main: '#F5A623', light: 'rgba(245,166,35,.10)', pale: 'rgba(245,166,35,.05)' },
+    sage:  { main: '#6EC6B0', light: 'rgba(110,198,176,.10)', pale: 'rgba(110,198,176,.05)' },
+    blue:  { main: '#7DADE2', light: 'rgba(125,173,226,.10)', pale: 'rgba(125,173,226,.05)' },
+    pink:  { main: '#F0A0BA', light: 'rgba(240,160,186,.10)', pale: 'rgba(240,160,186,.05)' },
+    sand:  { main: '#F5BE5E', light: 'rgba(245,190,94,.10)', pale: 'rgba(245,190,94,.05)' },
     clay:  { main: '#E67E22', light: 'rgba(230,126,34,.10)', pale: 'rgba(230,126,34,.05)' },
-    slate: { main: '#5B86E5', light: 'rgba(91,134,229,.10)', pale: 'rgba(91,134,229,.05)' },
-    rose:  { main: '#E84393', light: 'rgba(232,67,147,.10)', pale: 'rgba(232,67,147,.05)' },
+    slate: { main: '#7DADE2', light: 'rgba(125,173,226,.10)', pale: 'rgba(125,173,226,.05)' },
+    rose:  { main: '#F0A0BA', light: 'rgba(240,160,186,.10)', pale: 'rgba(240,160,186,.05)' },
   };
   const c = colorMap[p.color_token] || colorMap.sage;
 
@@ -1703,5 +1703,5 @@ function scrollToSection(evt, key) {
   </div>
 </div>
 </body>
-<!-- cache bust v20260720i -->
+<!-- cache bust v20260720j -->
 </html>
